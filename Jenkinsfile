@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvn install'
+				timeout(time: 3, unit: 'MINUTES') {
+					bat 'mvn install'
+				}
             }
         }
     }
