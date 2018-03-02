@@ -5,6 +5,7 @@ pipeline {
             steps {
 				timeout(time: 3, unit: 'MINUTES') {
 					bat 'cd snippets & mvn install'
+					bat 'cd primefaces & mvn install'
 				}
             }
         }
