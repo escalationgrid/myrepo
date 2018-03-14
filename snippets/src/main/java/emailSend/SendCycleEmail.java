@@ -20,9 +20,10 @@ public class SendCycleEmail {
     public static void main(String[] args) {
 
     	List<String> emailsTo = new ArrayList<String>();
-    	//emailsTo.add("escalationgrid.loc@gmail.com");
+    	emailsTo.add("escalationgrid.loc@gmail.com");
     	//emailsTo.add("escalationgrid.lab@gmail.com");
-    	emailsTo.add("escalationgrid.aws@gmail.com");
+    	//emailsTo.add("escalationgrid.aws@gmail.com");
+    	//emailsTo.add("escalationgrid.aws.vendas@gmail.com");
     	
         String host = "smtp.gmail.com";
         String port = "587";
@@ -37,9 +38,45 @@ public class SendCycleEmail {
         		System.out.println("Cycle HTML Email sent to: " + emailTo + " ->Subject: " + subject);
         	}
         } catch (Exception ex) {
-            System.out.println("Failed to sent email.");
+            System.out.println("Failed to send email.");
             ex.printStackTrace();
         }
+    }
+    
+    public void sendHtmlEmail(String host, String port,
+            final String userName, final String password, String toAddress,
+            String subject, String message) throws AddressException,
+            MessagingException {
+ 
+        // sets SMTP server properties
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+ 
+        // creates a new session with an authenticator
+        Authenticator auth = new Authenticator() {
+            public PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(userName, password);
+            }
+        };
+ 
+        Session session = Session.getInstance(properties, auth);
+ 
+        // creates a new e-mail message
+        Message msg = new MimeMessage(session);
+ 
+        msg.setFrom(new InternetAddress(userName));
+        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
+        msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        msg.setSubject(subject);
+        msg.setSentDate(new Date());
+        msg.setContent(message, "text/html");
+ 
+        // sends the e-mail
+        Transport.send(msg);
+ 
     }
     
     public static final String subject = "Chamado 7423.3: DISPONIBILIZAÇÃO DE RECURSOS - RECURSOS DE INFRA PARA NOVOS CONTRATADOS;";
@@ -230,39 +267,5 @@ public class SendCycleEmail {
     		"</body>\r\n" + 
     		"</html>";
     
-    public void sendHtmlEmail(String host, String port,
-            final String userName, final String password, String toAddress,
-            String subject, String message) throws AddressException,
-            MessagingException {
- 
-        // sets SMTP server properties
-        Properties properties = new Properties();
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", port);
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
- 
-        // creates a new session with an authenticator
-        Authenticator auth = new Authenticator() {
-            public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(userName, password);
-            }
-        };
- 
-        Session session = Session.getInstance(properties, auth);
- 
-        // creates a new e-mail message
-        Message msg = new MimeMessage(session);
- 
-        msg.setFrom(new InternetAddress(userName));
-        InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
-        msg.setRecipients(Message.RecipientType.TO, toAddresses);
-        msg.setSubject(subject);
-        msg.setSentDate(new Date());
-        msg.setContent(message, "text/html");
- 
-        // sends the e-mail
-        Transport.send(msg);
- 
-    }
+
 }
