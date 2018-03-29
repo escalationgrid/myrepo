@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class ReadEmail2 {
 	
-    public static final String USERNAME = "escalationgrid.lab@gmail.com";
+    public static final String USERNAME = "escalationgrid.loc@gmail.com";
     public static final String PASSWORD = "escalation123";
 
     public static void main(String[] args) throws Exception {
