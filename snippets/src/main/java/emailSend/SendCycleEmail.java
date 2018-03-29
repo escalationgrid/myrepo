@@ -20,9 +20,10 @@ public class SendCycleEmail {
     public static void main(String[] args) {
 
     	List<String> emailsTo = new ArrayList<String>();
+    	emailsTo.add("escalationgrid.loc.virt1@gmail.com");
     	emailsTo.add("escalationgrid.loc@gmail.com");
-    	emailsTo.add("escalationgrid.lab@gmail.com");
-    	//emailsTo.add("escalationgrid.aws@gmail.com");
+    	//emailsTo.add("escalationgrid.lab@gmail.com");
+    	emailsTo.add("escalationgrid.aws@gmail.com");
     	//emailsTo.add("escalationgrid.aws.vendas@gmail.com");
     	
         String host = "smtp.gmail.com";
