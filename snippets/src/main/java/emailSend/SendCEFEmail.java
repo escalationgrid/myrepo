@@ -35,6 +35,7 @@ public class SendCEFEmail {
        
     	
     	List<String> emailsTo = new ArrayList<String>();
+    	emailsTo.add("escalationgrid.loc.virt1@gmail.com");
     	emailsTo.add("escalationgrid.loc@gmail.com");
     	//emailsTo.add("escalationgrid.lab@gmail.com");
     	//emailsTo.add("escalationgrid.aws@gmail.com");
